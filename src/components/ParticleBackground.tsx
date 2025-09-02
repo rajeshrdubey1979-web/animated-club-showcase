@@ -8,17 +8,22 @@ const ParticleBackground = () => {
     if (!containerRef.current) return;
 
     const particles: HTMLElement[] = [];
-    const particleCount = 15;
+    const particleCount = 25; // Increased from 15
 
     // Create particles
     for (let i = 0; i < particleCount; i++) {
       const particle = document.createElement('div');
       particle.className = 'particle';
       
-      // Random size between 4-12px
-      const size = Math.random() * 8 + 4;
+      // Random size between 6-16px (increased size range)
+      const size = Math.random() * 10 + 6;
       particle.style.width = `${size}px`;
       particle.style.height = `${size}px`;
+      
+      // Add pink gradient background
+      particle.style.background = `linear-gradient(135deg, #EC4899, #F472B6)`;
+      particle.style.borderRadius = '50%';
+      particle.style.boxShadow = '0 0 20px rgba(236, 72, 153, 0.4)';
       
       // Random position
       particle.style.left = `${Math.random() * 100}%`;
@@ -33,18 +38,18 @@ const ParticleBackground = () => {
       gsap.set(particle, {
         x: Math.random() * window.innerWidth,
         y: Math.random() * window.innerHeight,
-        opacity: Math.random() * 0.5 + 0.3
+        opacity: Math.random() * 0.7 + 0.4 // Increased opacity range
       });
 
       gsap.to(particle, {
-        x: `+=${Math.random() * 200 - 100}`,
-        y: `+=${Math.random() * 200 - 100}`,
+        x: `+=${Math.random() * 400 - 200}`, // Increased movement range
+        y: `+=${Math.random() * 400 - 200}`, // Increased movement range
         rotation: 360,
-        duration: Math.random() * 20 + 10,
+        duration: Math.random() * 8 + 4, // Faster speed (was 20 + 10)
         repeat: -1,
         yoyo: true,
         ease: "sine.inOut",
-        delay: index * 0.2
+        delay: index * 0.1 // Faster stagger
       });
     });
 
